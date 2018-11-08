@@ -9,7 +9,7 @@ def results():
     c = db.cursor()
     print("\n")
     print("What are the most popular three articles of all time? \n")
-    c.execute("""SELECT articles.title, cast(finalview.count AS varchar)
+    c.execute("""SELECT articles.title, finalview.count
     FROM articles, finalview WHERE articles.slug=finalview.cut
     ORDER BY COUNT DESC LIMIT 3;""")
     row = c.fetchall()
@@ -20,7 +20,7 @@ def results():
     print("Who are the most popular article authors of all time? ")
     print("\n")
     c1.execute("""select distinct(authorsids.name) ,
-     cast(summedviews.sum as varchar) from authorsids ,
+     summedviews.sum from authorsids ,
       summedviews where authorsids.author=summedviews.author
       order by sum desc;""")
     row1 = c1.fetchall()
